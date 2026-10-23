@@ -126,7 +126,8 @@
   --border-width: 1px;
   --accent-bar-width: 4px;
   --content-max-width: 1120px;
-  --header-height: 64px;
+  --header-height: 72px;
+  --logo-height: 44px;  /* ≈142px wide: above the 80px brand minimum */
   --icon-circle-size: 44px;
   --transition-fast: 120ms ease;
 }

@@ -69,12 +69,14 @@ a { color: var(--color-primary); }
   top: var(--space-2);
 }
 
-/* Header (navy band) */
+/* Header: white band with the colour logo (brand: colour logo on light
+   backgrounds only; never recolour it). */
 
 .app-header {
-  background: var(--color-primary);
-  color: var(--color-primary-contrast);
+  background: var(--color-surface);
+  color: var(--color-text);
   min-height: var(--header-height);
+  border-bottom: var(--border-width) solid var(--color-line);
 }
 
 .app-header__inner {
@@ -89,10 +91,25 @@ a { color: var(--color-primary); }
 }
 
 .app-header__brand {
-  color: var(--color-primary-contrast);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  color: var(--color-text);
   text-decoration: none;
+}
+
+.app-header__logo {
+  height: var(--logo-height);
+  width: auto;
+  display: block;
+}
+
+.app-header__name {
+  padding-left: var(--space-4);
+  border-left: var(--border-width) solid var(--color-line);
   font-size: var(--font-size-h3);
   font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
 }
 
 .app-header__user {
@@ -104,20 +121,6 @@ a { color: var(--color-primary); }
 
 .app-header__user span {
   white-space: nowrap;
-}
-
-.app-header .btn {
-  border-color: var(--color-primary-contrast);
-  color: var(--color-primary-contrast);
-  background: transparent;
-}
-
-.app-header .btn:hover {
-  background: var(--color-primary-hover);
-}
-
-.app-header :focus-visible {
-  box-shadow: 0 0 0 3px var(--color-primary-contrast);
 }
 
 /* Main */
@@ -165,6 +168,7 @@ a { color: var(--color-primary); }
   color: var(--color-primary);
   cursor: pointer;
   text-decoration: none;
+  white-space: nowrap;
   transition: background var(--transition-fast);
 }
 
@@ -335,6 +339,7 @@ a { color: var(--color-primary); }
 /* Responsive */
 
 @media (max-width: 640px) {
+  .app-header__name { display: none; }
   .app-main { padding: var(--space-5) var(--space-4); }
   .project-list__item { flex-direction: column; align-items: flex-start; }
 }
