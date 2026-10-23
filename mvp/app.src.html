@@ -111,7 +111,7 @@ footer { border-top: 1px solid var(--line); text-align: center; font-size: var(-
 .panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-sm); padding: var(--s5); display: flex; flex-direction: column; gap: var(--s4); min-width: 0; }
 .panel > h2 { font-size: var(--fs-h3); }
 
-.actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--s4); }
+.actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--s4); }
 .action { display: flex; flex-direction: column; gap: var(--s3); text-align: left; padding: var(--s5); background: var(--card); border: 1px solid var(--card); border-radius: var(--r-sm); cursor: pointer; color: var(--fg); }
 .action:hover { border-color: var(--accent); }
 .action .ico { width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: #ffffff; display: grid; place-items: center; }
@@ -196,6 +196,31 @@ td .cell-input { min-width: 8rem; }
 .counter.alert-c { box-shadow: inset 4px 0 0 var(--alert); }
 .toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(var(--s5) + env(safe-area-inset-bottom, 0px)); background: var(--fg); color: var(--bg); padding: var(--s3) var(--s5); border-radius: var(--r-pill); font-size: var(--fs-sm); font-weight: 700; z-index: 20; max-width: calc(100% - 32px); }
 
+/* Assistant */
+.chat { display: flex; flex-direction: column; gap: var(--s4); }
+.chat-log { display: flex; flex-direction: column; gap: var(--s3); min-height: 8rem; }
+.msg { display: flex; flex-direction: column; gap: var(--s2); max-width: min(760px, 100%); min-width: 0; }
+.msg-user { align-self: flex-end; align-items: flex-end; }
+.bubble { margin: 0; padding: var(--s3) var(--s4); white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.45; }
+.msg-user .bubble { background: var(--primary); color: var(--on-primary); border-radius: 16px 16px 4px 16px; }
+.msg-ai .bubble { background: var(--card); border-radius: 16px 16px 16px 4px; }
+.msg-ai .bubble.thinking { color: var(--muted); }
+.agent-card { max-width: min(760px, 100%); border: 1px solid var(--line); border-radius: var(--r-sm); background: var(--surface); padding: var(--s4); display: flex; flex-direction: column; gap: var(--s3); min-width: 0; }
+.agent-card > .chip, .agent-card > .err { align-self: flex-start; }
+.agent-card .eyebrow { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 700; }
+.agent-card h3 { font-size: var(--fs-body); }
+.agent-card pre { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-family: inherit; font-size: var(--fs-sm); background: var(--card); padding: var(--s3); border-radius: var(--r-sm); }
+.agent-card .facts { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); }
+.agent-card .inline-dots { display: flex; gap: var(--s3); align-items: center; font-size: var(--fs-sm); }
+.suggestions { display: flex; flex-direction: column; gap: var(--s2); align-items: flex-start; }
+.suggestion { background: var(--card); border: 1px solid var(--card); border-radius: var(--r-pill); padding: var(--s2) var(--s4); cursor: pointer; color: var(--fg); font-size: var(--fs-sm); text-align: left; }
+.suggestion:hover { border-color: var(--accent); }
+.composer { position: sticky; bottom: env(safe-area-inset-bottom, 0px); background: var(--bg); border-top: 1px solid var(--line); padding-block: var(--s3); display: flex; flex-direction: column; gap: var(--s2); }
+.composer textarea { width: 100%; padding: var(--s3); border: 1px solid var(--control); border-radius: var(--r-sm); background: var(--surface); color: var(--fg); resize: vertical; min-height: 4.5rem; }
+.composer .row { justify-content: space-between; }
+.file-btn { position: relative; overflow: hidden; }
+.file-btn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
 @media (max-width: 640px) {
   :root { --fs-h1: 1.625rem; --fs-h2: 1.25rem; }
   .brand span { display: none; }
@@ -213,6 +238,7 @@ td .cell-input { min-width: 8rem; }
     </button>
     <nav aria-label="Secciones">
       <button type="button" data-go="home">Inicio</button>
+      <button type="button" data-go="assistant">Asistente</button>
       <button type="button" data-go="meeting">Subir reunión</button>
       <button type="button" data-go="todos">To-do's</button>
     </nav>
@@ -245,6 +271,7 @@ const ICONS = {
   plus: '<path d="M12 5v14M5 12h14"/>',
   upload: '<path d="M12 16V4M7 9l5-5 5 5M5 20h14"/>',
   todos: '<path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/>',
+  chat: '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/>',
 };
 const WARN = '<svg class="warn-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 21h20L12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v5M12 18v.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
 
@@ -291,6 +318,15 @@ const S = {
   confirm: null,   // id of the row waiting for delete confirmation
   editTodo: null,  // id of the to-do in edit mode
   toastTimer: 0,
+  // Assistant
+  toolsOk: false,
+  chat: [],        // what the assistant screen shows: messages and cards
+  history: [],     // turns sent to Claude (user / assistant text only)
+  docs: [],        // documents shared in the chat: { id, name, text, words }
+  pendingDocs: [], // documents attached to the message being written
+  agentNotes: [],  // things that happened since the last message (confirmations, drafts ready)
+  chatInput: '',
+  agentRun: null,  // AbortController while the assistant works
 };
 
 const app = document.getElementById('app');
@@ -335,13 +371,13 @@ function go(name, params = {}) {
 
 function render() {
   document.querySelectorAll('.band nav button').forEach((b) => {
-    const current = b.dataset.go === S.view.name || (b.dataset.go === 'home' && ['project', 'newProject', 'minutes', 'email'].includes(S.view.name)) || (b.dataset.go === 'meeting' && S.view.name === 'review');
+    const current = b.dataset.go === S.view.name || (b.dataset.go === 'home' && ['project', 'newProject', 'minutes', 'email'].includes(S.view.name)) || (b.dataset.go === 'meeting' && S.view.name === 'review' && !S.draft?.fromAgent) || (b.dataset.go === 'assistant' && S.view.name === 'review' && S.draft?.fromAgent);
     b.toggleAttribute('aria-current', current);
     if (current) b.setAttribute('aria-current', 'page');
   });
   if (S.noDb) { app.innerHTML = viewNoDb(); return; }
   if (!S.ready) return;
-  const views = { home: viewHome, project: viewProject, newProject: viewNewProject, meeting: viewMeeting, review: viewReview, minutes: viewMinutes, email: viewEmail, todos: viewTodos };
+  const views = { home: viewHome, project: viewProject, newProject: viewNewProject, meeting: viewMeeting, review: viewReview, minutes: viewMinutes, email: viewEmail, todos: viewTodos, assistant: viewAssistant };
   app.innerHTML = (views[S.view.name] || viewHome)();
 }
 
@@ -382,6 +418,7 @@ function viewHome() {
       <button class="action" type="button" data-go="newProject"><span class="ico">${icon('plus')}</span><strong>Abrir un proyecto</strong><span>Registra un proyecto de cliente con su equipo y fechas.</span></button>
       <button class="action" type="button" data-go="meeting"><span class="ico">${icon('upload')}</span><strong>Subir transcript o notas de reunión</strong><span>Claude redacta el acta con citas literales y to-do's.</span></button>
       <button class="action" type="button" data-go="todos"><span class="ico">${icon('todos')}</span><strong>Consultar to-do's</strong><span>Revisa tareas pendientes y vencidas y descárgalas en Excel.</span></button>
+      <button class="action" type="button" data-go="assistant"><span class="ico">${icon('chat')}</span><strong>Hablar con el asistente</strong><span>Pídele en tus palabras que prepare un acta, revise to-do's o resuma un proyecto.</span></button>
     </div>
     <section class="panel" aria-labelledby="active-title">
       <h2 id="active-title">Proyectos activos</h2>
@@ -562,7 +599,8 @@ function viewReview() {
       <td><input class="cell-input" type="date" aria-label="Fecha ${i + 1}" data-draft="todos.${i}.dueDate" value="${esc(t.dueDate)}">${t.dueDate ? '' : '<span class="hint">Por definir</span>'}</td>
       <td><button class="btn-link" type="button" data-act="remove-todo-row" data-i="${i}">Quitar</button></td>
     </tr>`).join('');
-  return `${pageHead('Revisa el acta', 'Corrige lo que necesites. Nada se guarda hasta que pulses «Guardar acta».', { back: { go: 'meeting', label: 'Volver al formulario' } })}
+  const back = d.fromAgent ? { go: 'assistant', label: 'Volver al asistente' } : { go: 'meeting', label: 'Volver al formulario' };
+  return `${pageHead('Revisa el acta', 'Corrige lo que necesites. Nada se guarda hasta que pulses «Guardar acta».', { back })}
     <section class="panel">
       <dl class="facts">
         <div><dt>Proyecto</dt><dd>${esc(p?.code)} · ${esc(p?.client)}</dd></div>
@@ -591,7 +629,7 @@ function viewReview() {
     </section>
     ${S.view.confirmUnverified ? `<div class="alert warn" role="alert">${WARN}<div><p>Hay ${unverified} ${unverified === 1 ? 'cita que no aparece' : 'citas que no aparecen'} literalmente en el documento. Corrígelas o quítalas. Si las guardas así, quedarán marcadas como no verificadas en el acta.</p><div class="row"><button class="btn btn-small btn-danger" type="button" data-act="save-minutes" data-force="1">Guardar con citas sin verificar</button><button class="btn-link" type="button" data-act="cancel-force">Seguir revisando</button></div></div></div>` : ''}
     ${errorBox()}
-    <div class="form-foot"><button class="btn btn-primary" type="button" data-act="save-minutes">Guardar acta</button><button class="btn" type="button" data-act="regenerate">Volver a generar</button><button class="btn-link" type="button" data-go="meeting">Descartar</button></div>`;
+    <div class="form-foot"><button class="btn btn-primary" type="button" data-act="save-minutes">Guardar acta</button><button class="btn" type="button" data-act="regenerate">Volver a generar</button><button class="btn-link" type="button" data-go="${back.go}">${d.fromAgent ? 'Volver sin guardar' : 'Descartar'}</button></div>`;
 }
 
 function viewMinutes() {
@@ -882,31 +920,48 @@ function splitText(text) {
   return chunks;
 }
 
-async function generateMinutes() {
-  const f = S.form;
+// Drafts minutes from a document: one call per chunk, a merge call when the
+// document was split, then local quote verification.
+async function buildMinutes({ text, ctx, onProgress = () => {} }) {
+  const chunks = splitText(text);
+  const partials = [];
+  for (let i = 0; i < chunks.length; i++) {
+    onProgress(chunks.length > 1 ? `Redactando el acta (parte ${i + 1} de ${chunks.length})…` : 'Redactando el acta…');
+    const raw = await S.sample.json(minutesPrompt({ text: chunks[i], part: i + 1, parts: chunks.length, ctx }), {
+      modelTier: 'default',
+      onText: ({ text: written }) => onProgress(null, `Claude está escribiendo… (${written.length.toLocaleString('es-ES')} caracteres)`),
+    });
+    partials.push(cleanMinutes(raw));
+  }
+  let minutes = partials[0];
+  if (partials.length > 1) {
+    onProgress('Uniendo las partes del acta…');
+    minutes = cleanMinutes(await S.sample.json(mergePrompt(partials, ctx), { modelTier: 'default' }));
+  }
+  onProgress('Comprobando las citas…');
+  verifyAll(minutes, text);
+  return { minutes, chunks: chunks.length };
+}
+
+function minutesContext(f) {
   const p = project(f.projectId);
   const people = (p.participants || []).filter((x) => f.participantIds.includes(x.id)).map(personLabel).join('; ');
-  const ctx = { date: f.date, type: f.type, sourceType: f.sourceType, people };
-  const chunks = splitText(f.text);
-  const progress = (text, detail) => { S.busy = { text, detail }; render(); };
+  return { date: f.date, type: f.type, sourceType: f.sourceType, people };
+}
+
+function draftFromForm(f, result) {
+  return { projectId: f.projectId, date: f.date, type: f.type, participantIds: [...f.participantIds], sourceType: f.sourceType, sourceFileName: f.fileName, sourceText: f.text, minutes: result.minutes, chunks: result.chunks, fromAgent: Boolean(f.fromAgent), cardId: f.cardId || '' };
+}
+
+async function generateMinutes() {
+  const f = S.form;
+  const onProgress = (text, detail) => {
+    if (text) { S.busy = { text }; render(); }
+    if (detail) { const el = app.querySelector('.progress .muted'); if (el) el.textContent = detail; }
+  };
   try {
-    const partials = [];
-    for (let i = 0; i < chunks.length; i++) {
-      progress(chunks.length > 1 ? `Redactando el acta (parte ${i + 1} de ${chunks.length})…` : 'Redactando el acta…');
-      const raw = await S.sample.json(minutesPrompt({ text: chunks[i], part: i + 1, parts: chunks.length, ctx }), {
-        modelTier: 'default',
-        onText: ({ text }) => { const el = app.querySelector('.progress .muted'); if (el) el.textContent = `Claude está escribiendo… (${text.length.toLocaleString('es-ES')} caracteres)`; },
-      });
-      partials.push(cleanMinutes(raw));
-    }
-    let minutes = partials[0];
-    if (partials.length > 1) {
-      progress('Uniendo las partes del acta…');
-      minutes = cleanMinutes(await S.sample.json(mergePrompt(partials, ctx), { modelTier: 'default' }));
-    }
-    progress('Comprobando las citas…');
-    verifyAll(minutes, f.text);
-    S.draft = { projectId: f.projectId, date: f.date, type: f.type, participantIds: [...f.participantIds], sourceType: f.sourceType, sourceFileName: f.fileName, sourceText: f.text, minutes, chunks: chunks.length };
+    const result = await buildMinutes({ text: f.text, ctx: minutesContext(f), onProgress });
+    S.draft = draftFromForm(f, result);
     S.busy = null;
     S.view = { name: 'review' };
     render();
@@ -1083,26 +1138,34 @@ async function write(fn, okText) {
   }
 }
 
-async function saveProject() {
-  const f = S.form;
+function validateProject(f) {
   const e = {};
-  const code = f.code.trim();
-  if (!f.client.trim()) e.client = 'Escribe el cliente.';
+  const code = String(f.code || '').trim();
+  if (!String(f.client || '').trim()) e.client = 'Escribe el cliente.';
   if (!code) e.code = 'Escribe el código del proyecto.';
   else if (S.projects.some((p) => p.code.toLowerCase() === code.toLowerCase())) e.code = 'Ya existe un proyecto con este código.';
-  if (!f.name.trim()) e.name = 'Escribe el nombre del proyecto.';
+  if (!String(f.name || '').trim()) e.name = 'Escribe el nombre del proyecto.';
   if (!f.startDate) e.startDate = 'Indica la fecha de inicio.';
   if (!f.endDate) e.endDate = 'Indica la fecha de fin.';
   else if (f.startDate && f.endDate < f.startDate) e.endDate = 'La fecha de fin no puede ser anterior a la de inicio.';
-  if (f.budget === '' || Number(f.budget) < 0 || Number.isNaN(Number(f.budget))) e.budget = 'Indica el presupuesto en euros (0 o más).';
-  f.errors = e;
-  if (Object.keys(e).length) { render(); app.querySelector('[aria-invalid="true"]')?.focus(); return; }
-  const id = newId();
-  const data = {
-    code, client: f.client.trim(), name: f.name.trim(), startDate: f.startDate, endDate: f.endDate, budget: Number(f.budget),
+  if (f.budget === '' || f.budget === null || f.budget === undefined || Number(f.budget) < 0 || Number.isNaN(Number(f.budget))) e.budget = 'Indica el presupuesto en euros (0 o más).';
+  return e;
+}
+
+function projectDoc(f) {
+  return {
+    code: f.code.trim(), client: f.client.trim(), name: f.name.trim(), startDate: f.startDate, endDate: f.endDate, budget: Number(f.budget),
     status: 'active', closedAt: null, createdAt: new Date().toISOString(),
-    participants: f.people.filter((x) => x.name.trim()).map((x) => ({ id: newId(), name: x.name.trim(), role: x.role.trim(), type: x.type })),
+    participants: f.people.filter((x) => String(x.name || '').trim()).map((x) => ({ id: newId(), name: String(x.name).trim(), role: String(x.role || '').trim(), type: x.type === 'internal' ? 'internal' : 'client' })),
   };
+}
+
+async function saveProject() {
+  const f = S.form;
+  f.errors = validateProject(f);
+  if (Object.keys(f.errors).length) { render(); app.querySelector('[aria-invalid="true"]')?.focus(); return; }
+  const id = newId();
+  const data = projectDoc(f);
   if (await write(() => S.db.collection('projects').doc(id).set(data), 'Proyecto guardado')) {
     S.projects = [...S.projects.filter((p) => p.id !== id), { id, ...data }];
     go('project', { id });
@@ -1147,9 +1210,435 @@ async function saveMinutes(force) {
   }, 'Acta guardada');
   if (ok) {
     S.meetings = [...S.meetings.filter((x) => x.id !== ref.id), { id: ref.id, ...meetingDoc }];
+    if (d.cardId) {
+      const card = S.chat.find((x) => x.id === d.cardId);
+      if (card) { card.state = 'saved'; card.meetingId = ref.id; }
+      S.agentNotes.push(`El usuario ha revisado y guardado el acta de la reunión del ${fmtDate(d.date)} (${project(d.projectId)?.code}); su meetingId es ${ref.id}.`);
+    }
     S.draft = null;
     go('minutes', { id: ref.id });
   }
+}
+
+// ---------------------------------------------------------------------------
+// Assistant (agent): Claude decides the steps and uses the page's tools.
+// Every change it proposes becomes a card the user confirms; the tools never
+// write to the store by themselves.
+// ---------------------------------------------------------------------------
+
+function agentInstructions() {
+  const today = todayIso();
+  const data = {
+    proyectos: S.projects.map((p) => ({
+      code: p.code, client: p.client, name: p.name, startDate: p.startDate, endDate: p.endDate, budgetEUR: p.budget,
+      status: p.status === 'closed' ? 'cerrado' : 'activo',
+      participants: (p.participants || []).map((x) => ({ name: x.name, role: x.role, type: x.type === 'client' ? 'cliente' : 'interno' })),
+      meetings: meetingsOf(p.id).slice(0, 15).map((m) => ({ meetingId: m.id, date: m.date, type: typeLabel(m.type), summary: m.minutes?.summary || '', decisions: m.minutes?.decisions || [], openPoints: m.minutes?.openPoints || [] })),
+      todos: todosOf(p.id).map((t) => ({ todoId: t.id, task: t.task, owner: t.owner || null, dueDate: t.dueDate || null, status: t.status === 'done' ? 'hecho' : isOverdue(t) ? 'vencido' : 'pendiente', meetingDate: meeting(t.meetingId)?.date || null })),
+    })),
+    documentosAdjuntos: S.docs.map((d) => ({ documentId: d.id, name: d.name, words: d.words, start: d.text.slice(0, 1500) })),
+  };
+  return `Eres el asistente de proyectos de Lukkap, una consultora de experiencia de cliente y de empleado. Ayudas a una consultora a gestionar sus proyectos, actas de reunión y to-do's.
+
+Hoy es ${fmtDate(today)} (${today}).
+
+Cómo trabajas:
+- Usa solo los datos de abajo y tus herramientas. Si algo no está en los datos, dilo; no inventes.
+- Para cambiar algo usa las herramientas. Crear proyectos, añadir participantes y cambiar to-do's crea una propuesta que el usuario confirma en pantalla: no digas que está hecho hasta que lo veas en las «Novedades» de un mensaje posterior.
+- Para un acta necesitas proyecto, fecha, tipo de reunión (interna o externa), tipo de documento (transcript o notas) y un documento adjunto. Deduce del documento lo que diga claramente (fecha, asistentes, cliente) y pregunta solo lo que falte. Si asisten personas que no están en el proyecto, propón añadirlas con propose_participant en la misma respuesta.
+- El acta se prepara en segundo plano y aparece en una tarjeta; el usuario la revisa y la guarda. La app verifica las citas literales.
+- El email al cliente solo se redacta para reuniones externas ya guardadas. Si en la reunión hubo varios internos y no sabes quién firma, pregunta.
+- El presupuesto es confidencial: puedes comentarlo con el usuario, pero nunca lo incluyas en actas ni emails.
+- Cuando respondas sobre reuniones, cita la fuente así: (Reunión DD/MM/AAAA, Externa).
+- Responde en español de España, breve y directo, en texto plano sin emojis ni markdown; usa guiones para las listas.
+
+Datos actuales (JSON):
+${JSON.stringify(data)}`;
+}
+
+const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
+
+function projectByCode(code) {
+  const p = S.projects.find((x) => x.code.toLowerCase() === String(code || '').trim().toLowerCase());
+  if (!p) throw new Error(`No existe ningún proyecto con el código «${code}». Los códigos válidos están en los datos.`);
+  return p;
+}
+
+function addCard(card) {
+  const item = { type: 'card', id: newId(), state: 'pending', ...card };
+  S.chat.push(item);
+  if (S.view.name === 'assistant') {
+    app.querySelector('.chat-log')?.insertAdjacentHTML('beforeend', cardHtml(item));
+    scrollChat();
+  }
+  return item;
+}
+
+function refreshCard(card) {
+  const el = app.querySelector(`[data-card-id="${card.id}"]`);
+  if (el) el.outerHTML = cardHtml(card);
+}
+
+async function runMinutesCard(card) {
+  card.state = 'working';
+  card.progress = 'Redactando el acta…';
+  refreshCard(card);
+  try {
+    const result = await buildMinutes({ text: card.form.text, ctx: minutesContext(card.form), onProgress: (text) => { if (text) { card.progress = text; refreshCard(card); } } });
+    card.form.cardId = card.id;
+    card.draft = draftFromForm(card.form, result);
+    card.state = 'ready';
+    const m = result.minutes;
+    const unverified = m.findings.reduce((n, f) => n + f.quotes.filter((q) => !q.verified).length, 0);
+    const noOwner = m.todos.filter((t) => !t.owner).length;
+    card.stats = { findings: m.findings.length, unverified, todos: m.todos.length, noOwner };
+    S.agentNotes.push(`El borrador del acta del ${fmtDate(card.form.date)} (${project(card.form.projectId)?.code}) está listo para que el usuario lo revise: ${m.findings.length} hallazgos, ${unverified} citas sin verificar, ${m.todos.length} to-do's${noOwner ? `, ${noOwner} sin responsable` : ''}. Aún no está guardado.`);
+  } catch (e) {
+    console.error(e);
+    card.state = 'error';
+    card.error = aiMessage(e);
+  }
+  refreshCard(card);
+}
+
+async function runEmailCard(card) {
+  card.state = 'working';
+  refreshCard(card);
+  const m = meeting(card.meetingId);
+  const p = project(m.projectId);
+  try {
+    const { text } = await S.sample(emailPrompt(m, p, card.opts), { modelTier: 'default', cache: false });
+    card.subject = `${p.name} - ${card.opts.lang === 'en' ? 'Meeting summary' : 'Resumen reunión'} ${fmtDate(m.date)}`;
+    card.body = text.trim();
+    card.state = 'ready';
+  } catch (e) {
+    console.error(e);
+    card.state = 'error';
+    card.error = aiMessage(e);
+  }
+  refreshCard(card);
+}
+
+function agentTools() {
+  return [
+    {
+      name: 'prepare_minutes',
+      description: 'Starts drafting the minutes of a meeting from a document attached in the chat. Runs in the background (1-2 minutes) and shows a card where the user reviews and saves them; returns at once. Call it only when project, date, meeting type and document type are known.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          projectCode: { type: 'string' },
+          documentId: { type: 'string' },
+          date: { type: 'string', description: 'Meeting date, YYYY-MM-DD' },
+          meetingType: { type: 'string', enum: ['internal', 'external'] },
+          sourceType: { type: 'string', enum: ['transcript', 'notes'] },
+          participantNames: { type: 'array', items: { type: 'string' }, description: 'People who attended' },
+        },
+        required: ['projectCode', 'documentId', 'date', 'meetingType', 'sourceType'],
+      },
+      execute(input) {
+        const p = projectByCode(input.projectCode);
+        const doc = S.docs.find((d) => d.id === String(input.documentId));
+        if (!doc) throw new Error('No hay ningún documento con ese identificador. Pide al usuario que lo adjunte.');
+        if (!DATE_RE.test(String(input.date))) throw new Error('La fecha debe tener el formato AAAA-MM-DD.');
+        const people = p.participants || [];
+        const ids = [];
+        const unknown = [];
+        (Array.isArray(input.participantNames) ? input.participantNames : []).map((n) => String(n).trim()).filter(Boolean).forEach((name) => {
+          const low = name.toLowerCase();
+          const hit = people.find((x) => x.name.toLowerCase() === low) || people.find((x) => x.name.toLowerCase().includes(low) || low.includes(x.name.toLowerCase()));
+          if (hit) { if (!ids.includes(hit.id)) ids.push(hit.id); } else unknown.push(name);
+        });
+        const form = {
+          projectId: p.id, client: p.client, date: String(input.date), type: input.meetingType === 'internal' ? 'internal' : 'external', participantIds: ids,
+          sourceType: input.sourceType === 'notes' ? 'notes' : 'transcript', fileName: doc.name, text: doc.text,
+          adding: false, newPerson: { name: '', role: '', type: 'client' }, errors: {}, fromAgent: true,
+        };
+        const card = addCard({ kind: 'minutes', form, state: 'working', progress: 'Redactando el acta…' });
+        runMinutesCard(card);
+        return { status: 'started', project: p.code, attendeesMatched: ids.length, attendeesNotInProject: unknown };
+      },
+    },
+    {
+      name: 'propose_project',
+      description: 'Proposes creating a new project. Shows a card the user must confirm; nothing is saved until then. Throws with the reason if a field is missing or invalid (for example, a duplicate code): ask the user for it.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          client: { type: 'string' }, code: { type: 'string' }, name: { type: 'string' },
+          startDate: { type: 'string', description: 'YYYY-MM-DD' }, endDate: { type: 'string', description: 'YYYY-MM-DD' },
+          budgetEUR: { type: 'number' },
+          participants: { type: 'array', items: { type: 'object', properties: { name: { type: 'string' }, role: { type: 'string' }, type: { type: 'string', enum: ['client', 'internal'] } }, required: ['name', 'type'] } },
+        },
+        required: ['client', 'code', 'name', 'startDate', 'endDate', 'budgetEUR'],
+      },
+      execute(input) {
+        const fields = {
+          client: String(input.client || ''), code: String(input.code || ''), name: String(input.name || ''),
+          startDate: DATE_RE.test(String(input.startDate)) ? String(input.startDate) : '', endDate: DATE_RE.test(String(input.endDate)) ? String(input.endDate) : '',
+          budget: input.budgetEUR, people: Array.isArray(input.participants) ? input.participants.map((x) => ({ name: String(x?.name || ''), role: String(x?.role || ''), type: x?.type === 'internal' ? 'internal' : 'client' })) : [],
+        };
+        const errors = Object.values(validateProject(fields));
+        if (errors.length) throw new Error(errors.join(' '));
+        addCard({ kind: 'project', fields });
+        return { status: 'waiting_for_user_confirmation' };
+      },
+    },
+    {
+      name: 'propose_participant',
+      description: 'Proposes adding a person to a project team. Shows a card the user must confirm.',
+      inputSchema: { type: 'object', properties: { projectCode: { type: 'string' }, name: { type: 'string' }, role: { type: 'string' }, type: { type: 'string', enum: ['client', 'internal'] } }, required: ['projectCode', 'name', 'type'] },
+      execute(input) {
+        const p = projectByCode(input.projectCode);
+        const name = String(input.name || '').trim();
+        if (!name) throw new Error('Falta el nombre de la persona.');
+        if ((p.participants || []).some((x) => x.name.toLowerCase() === name.toLowerCase())) throw new Error(`${name} ya está en el proyecto.`);
+        addCard({ kind: 'participant', projectId: p.id, person: { name, role: String(input.role || '').trim(), type: input.type === 'internal' ? 'internal' : 'client' } });
+        return { status: 'waiting_for_user_confirmation' };
+      },
+    },
+    {
+      name: 'propose_todo_update',
+      description: 'Proposes changing a to-do (status, owner or due date) or deleting it. Shows a card the user must confirm. Use an empty string to clear owner or due date.',
+      inputSchema: {
+        type: 'object',
+        properties: {
+          todoId: { type: 'string' }, status: { type: 'string', enum: ['pending', 'done'] }, owner: { type: 'string' },
+          dueDate: { type: 'string', description: 'YYYY-MM-DD, or empty to clear' }, remove: { type: 'boolean', description: 'true to delete the to-do' },
+        },
+        required: ['todoId'],
+      },
+      execute(input) {
+        const t = S.todos.find((x) => x.id === String(input.todoId));
+        if (!t) throw new Error('No existe ningún to-do con ese identificador.');
+        const changes = {};
+        if (input.status === 'done' || input.status === 'pending') changes.status = input.status;
+        if (typeof input.owner === 'string') changes.owner = input.owner.trim();
+        if (typeof input.dueDate === 'string') {
+          if (input.dueDate && !DATE_RE.test(input.dueDate)) throw new Error('La fecha debe tener el formato AAAA-MM-DD.');
+          changes.dueDate = input.dueDate;
+        }
+        if (!input.remove && !Object.keys(changes).length) throw new Error('No has indicado ningún cambio.');
+        addCard({ kind: 'todo', todoId: t.id, changes, remove: Boolean(input.remove) });
+        return { status: 'waiting_for_user_confirmation' };
+      },
+    },
+    {
+      name: 'draft_client_email',
+      description: 'Drafts the follow-up email to the client for a saved external meeting. Runs in the background and shows the draft in a card the user can copy; returns at once.',
+      inputSchema: { type: 'object', properties: { meetingId: { type: 'string' }, sender: { type: 'string', description: 'Name of the internal person who signs' }, language: { type: 'string', enum: ['es', 'en'] } }, required: ['meetingId', 'sender'] },
+      execute(input) {
+        const m = meeting(String(input.meetingId));
+        if (!m) throw new Error('No existe esa reunión guardada. Si el acta aún no está guardada, el usuario debe guardarla primero.');
+        if (m.type !== 'external') throw new Error('Solo se redacta email al cliente para reuniones externas.');
+        const sender = String(input.sender || '').trim();
+        if (!sender) throw new Error('Falta quién firma el email.');
+        const card = addCard({ kind: 'email', meetingId: m.id, state: 'working', opts: { sender, lang: input.language === 'en' ? 'en' : 'es' } });
+        runEmailCard(card);
+        return { status: 'started' };
+      },
+    },
+    {
+      name: 'read_minutes',
+      description: 'Returns the full saved minutes of one meeting, including findings with their verbatim quotes.',
+      inputSchema: { type: 'object', properties: { meetingId: { type: 'string' } }, required: ['meetingId'] },
+      execute(input) {
+        const m = meeting(String(input.meetingId));
+        if (!m) throw new Error('No existe esa reunión.');
+        const mi = m.minutes || {};
+        return { date: m.date, type: typeLabel(m.type), summary: mi.summary, findings: mi.findings, decisions: mi.decisions, openPoints: mi.openPoints };
+      },
+    },
+  ];
+}
+
+function addDoc(name, text) {
+  const doc = { id: `D${S.docs.length + 1}`, name, text, words: wordCount(text) };
+  S.docs.push(doc);
+  return doc;
+}
+
+async function sendToAgent(raw) {
+  if (S.agentRun) return;
+  let text = String(raw || '').trim();
+  // Long pasted text becomes an attached document instead of a chat message.
+  if (text.length > 2500) {
+    S.pendingDocs.push(addDoc('Texto pegado', text));
+    text = '';
+  }
+  const docs = S.pendingDocs.splice(0);
+  if (!text && !docs.length) return;
+  if (!text) text = 'Prepara el acta de este documento.';
+  S.chatInput = '';
+  S.chat.push({ role: 'user', text, docs: docs.map((d) => `${d.name} · ${d.words.toLocaleString('es-ES')} palabras`) });
+  const notes = S.agentNotes.splice(0);
+  const content = [
+    notes.length ? `Novedades desde mi último mensaje: ${notes.join(' ')}` : '',
+    text,
+    docs.length ? `Documentos adjuntos: ${docs.map((d) => `${d.id} «${d.name}» (${d.words} palabras)`).join('; ')}.` : '',
+  ].filter(Boolean).join('\n\n');
+  S.history.push({ role: 'user', content });
+  const bubble = { role: 'assistant', text: '', streaming: true };
+  S.chat.push(bubble);
+  const ctl = new AbortController();
+  S.agentRun = ctl;
+  render();
+  scrollChat();
+  try {
+    const { text: answer } = await S.sample([{ role: 'user', content: agentInstructions() }, ...S.history.slice(-20)], {
+      tools: agentTools(),
+      signal: ctl.signal,
+      modelTier: 'default',
+      onText: ({ text: soFar }) => { bubble.text = soFar; updateBubble(bubble); },
+    });
+    bubble.text = answer;
+  } catch (e) {
+    console.error(e);
+    bubble.text = e?.text || '';
+    if (e?.code !== 'cancelled') bubble.error = aiMessage(e);
+  }
+  bubble.streaming = false;
+  if (bubble.text) S.history.push({ role: 'assistant', content: bubble.text });
+  S.agentRun = null;
+  if (S.view.name === 'assistant') { render(); scrollChat(); }
+}
+
+function updateBubble(bubble) {
+  const el = app.querySelector(`[data-msg="${S.chat.indexOf(bubble)}"] .bubble`);
+  if (el) { el.textContent = plain(bubble.text); el.classList.remove('thinking'); }
+}
+
+function scrollChat() {
+  if (S.view.name !== 'assistant') return;
+  app.querySelector('.composer')?.scrollIntoView({ block: 'end' });
+}
+
+const plain = (t) => String(t || '').replace(/\*\*(.+?)\*\*/g, '$1');
+
+function cardHtml(c) {
+  const wrap = (eyebrow, inner) => `<section class="agent-card" data-card-id="${esc(c.id)}"><span class="eyebrow">${eyebrow}</span>${inner}</section>`;
+  const decision = c.state === 'pending'
+    ? `<div class="row"><button class="btn btn-small btn-primary" type="button" data-act="card-confirm" data-card="${esc(c.id)}">Confirmar</button><button class="btn-link" type="button" data-act="card-discard" data-card="${esc(c.id)}">Descartar</button></div>`
+    : c.state === 'confirmed' ? '<span class="chip chip-ok">Confirmado y guardado</span>'
+    : c.state === 'discarded' ? '<span class="chip chip-plain">Descartado</span>'
+    : c.state === 'error' ? `<p class="err">${WARN}${esc(c.error)}</p>` : '';
+  const working = (text) => `<div class="inline-dots"><div class="dots"><i></i><i></i><i></i></div><span>${esc(text)}</span></div>`;
+
+  if (c.kind === 'minutes') {
+    const p = project(c.form.projectId);
+    const head = `<h3>${esc(p?.code || '')} · Reunión ${typeLabel(c.form.type).toLowerCase()} del ${fmtDate(c.form.date)}</h3><p class="hint">${esc(c.form.fileName)}</p>`;
+    if (c.state === 'working') return wrap('Preparando el acta', head + working(c.progress || 'Redactando el acta…'));
+    if (c.state === 'error') return wrap('Acta', `${head}<p class="err">${WARN}${esc(c.error)}</p><div><button class="btn btn-small" type="button" data-act="card-retry" data-card="${esc(c.id)}">Reintentar</button></div>`);
+    if (c.state === 'saved') return wrap('Acta guardada', `${head}<div><button class="btn btn-small" type="button" data-go="minutes" data-id="${esc(c.meetingId)}">Ver acta</button></div>`);
+    const s = c.stats;
+    return wrap('Borrador del acta listo', `${head}
+      <div class="chips"><span class="chip">${s.findings} hallazgos</span>${s.unverified ? `<span class="chip chip-alert">${WARN} ${s.unverified} ${s.unverified === 1 ? 'cita sin verificar' : 'citas sin verificar'}</span>` : '<span class="chip chip-ok">Citas verificadas</span>'}<span class="chip">${s.todos} to-do's</span>${s.noOwner ? `<span class="chip chip-plain">${s.noOwner} sin responsable</span>` : ''}</div>
+      <p>${esc(c.draft.minutes.summary)}</p>
+      <div><button class="btn btn-small btn-primary" type="button" data-act="card-review" data-card="${esc(c.id)}">Revisar y guardar</button></div>`);
+  }
+  if (c.kind === 'email') {
+    const m = meeting(c.meetingId);
+    const head = `<h3>Email al cliente · reunión del ${fmtDate(m?.date)}</h3>`;
+    if (c.state === 'working') return wrap('Redactando el email', head + working('Claude está redactando el email…'));
+    if (c.state === 'error') return wrap('Email', `${head}<p class="err">${WARN}${esc(c.error)}</p><div><button class="btn btn-small" type="button" data-act="card-retry" data-card="${esc(c.id)}">Reintentar</button></div>`);
+    return wrap('Borrador del email', `${head}<p class="hint">Asunto: ${esc(c.subject)} · <span class="num">${wordCount(c.body)}</span> palabras</p><pre>${esc(c.body)}</pre>
+      <div class="row"><button class="btn btn-small btn-primary" type="button" data-act="card-copy" data-card="${esc(c.id)}">Copiar</button><button class="btn btn-small" type="button" data-act="card-edit-email" data-card="${esc(c.id)}">Abrir en el editor</button></div>`);
+  }
+  if (c.kind === 'project') {
+    const f = c.fields;
+    const team = (type) => f.people.filter((x) => x.type === type).map((x) => `${x.name}${x.role ? ` (${x.role})` : ''}`).join(', ') || '—';
+    return wrap('Propuesta · nuevo proyecto', `<h3>${esc(f.code)} · ${esc(f.name)}</h3>
+      <dl class="facts"><div><dt>Cliente</dt><dd>${esc(f.client)}</dd></div><div><dt>Fechas</dt><dd class="num">${fmtDate(f.startDate)} – ${fmtDate(f.endDate)}</dd></div><div><dt>Presupuesto</dt><dd class="num">${fmtEur(f.budget)}</dd></div></dl>
+      <p class="hint">Equipo del cliente: ${esc(team('client'))}<br>Equipo interno: ${esc(team('internal'))}</p>${decision}`);
+  }
+  if (c.kind === 'participant') {
+    const p = project(c.projectId);
+    return wrap('Propuesta · añadir participante', `<h3>${esc(personLabel(c.person))}</h3><p class="hint">Proyecto ${esc(p?.code)} · ${esc(p?.name)}</p>${decision}`);
+  }
+  if (c.kind === 'todo') {
+    const t = S.todos.find((x) => x.id === c.todoId) || c.snapshot || {};
+    const lines = c.remove ? ['Eliminar este to-do'] : [
+      c.changes.status ? `Estado: ${c.changes.status === 'done' ? 'hecho' : 'pendiente'}` : '',
+      'owner' in c.changes ? `Responsable: ${c.changes.owner || 'por definir'}` : '',
+      'dueDate' in c.changes ? `Fecha límite: ${c.changes.dueDate ? fmtDate(c.changes.dueDate) : 'por definir'}` : '',
+    ].filter(Boolean);
+    return wrap(c.remove ? 'Propuesta · eliminar to-do' : 'Propuesta · cambiar to-do', `<h3>${esc(t.task || 'To-do')}</h3><ul class="read-list">${lines.map((l) => `<li>${esc(l)}</li>`).join('')}</ul>${decision}`);
+  }
+  return '';
+}
+
+async function confirmCard(c) {
+  let ok = false;
+  if (c.kind === 'project') {
+    const errors = Object.values(validateProject(c.fields));
+    if (errors.length) { c.state = 'error'; c.error = errors.join(' '); refreshCard(c); return; }
+    const id = newId();
+    const data = projectDoc(c.fields);
+    ok = await write(() => S.db.collection('projects').doc(id).set(data), 'Proyecto creado');
+    if (ok) { S.projects = [...S.projects, { id, ...data }]; S.agentNotes.push(`El usuario confirmó la creación del proyecto ${data.code}.`); }
+  }
+  if (c.kind === 'participant') {
+    const p = project(c.projectId);
+    const participants = [...(p.participants || []), { id: newId(), ...c.person }];
+    ok = await write(() => S.db.collection('projects').doc(p.id).update({ participants }), 'Participante añadido');
+    if (ok) { p.participants = participants; S.agentNotes.push(`El usuario confirmó añadir a ${c.person.name} al proyecto ${p.code}.`); }
+  }
+  if (c.kind === 'todo') {
+    const t = S.todos.find((x) => x.id === c.todoId);
+    if (!t) { c.state = 'error'; c.error = 'Este to-do ya no existe.'; refreshCard(c); return; }
+    c.snapshot = { task: t.task };
+    if (c.remove) {
+      ok = await write(() => S.db.collection('todos').doc(t.id).delete(), 'To-do eliminado');
+    } else {
+      const changes = { ...c.changes };
+      if (changes.status) changes.doneAt = changes.status === 'done' ? todayIso() : '';
+      ok = await write(() => S.db.collection('todos').doc(t.id).update(changes), 'To-do actualizado');
+    }
+    if (ok) S.agentNotes.push(`El usuario confirmó ${c.remove ? 'eliminar' : 'cambiar'} el to-do «${t.task}».`);
+  }
+  if (ok) { c.state = 'confirmed'; S.error = null; }
+  if (S.view.name === 'assistant') render();
+}
+
+function viewAssistant() {
+  const unavailable = !S.sample
+    ? 'El asistente solo funciona al abrir la app desde Claude con tu sesión iniciada.'
+    : !S.toolsOk ? 'Tu versión de Claude todavía no permite que el asistente use las herramientas de la app. Puedes seguir usando las demás pantallas.' : '';
+  const items = S.chat.map((item, i) => {
+    if (item.type === 'card') return cardHtml(item);
+    if (item.role === 'user') {
+      return `<div class="msg msg-user" data-msg="${i}">${item.text ? `<p class="bubble">${esc(item.text)}</p>` : ''}${item.docs?.length ? `<div class="chips">${item.docs.map((d) => `<span class="chip chip-plain">Adjunto: ${esc(d)}</span>`).join('')}</div>` : ''}</div>`;
+    }
+    const thinking = item.streaming && !item.text;
+    return `<div class="msg msg-ai" data-msg="${i}">${item.text || item.streaming ? `<p class="bubble ${thinking ? 'thinking' : ''}">${thinking ? 'Pensando…' : esc(plain(item.text))}</p>` : ''}${item.error ? `<div class="alert warn" role="alert">${WARN}<div><p>${esc(item.error)}</p></div></div>` : ''}</div>`;
+  }).join('');
+  const suggestions = `<div class="suggestions">
+      <p class="muted">Prueba a pedirle, por ejemplo:</p>
+      <button class="suggestion" type="button" data-act="chat-suggest" data-sample="1" data-text="Prepara el acta de esta reunión con Hoteles Brisa del Sur.">Prepara el acta del transcript de ejemplo de Brisa del Sur</button>
+      <button class="suggestion" type="button" data-act="chat-suggest" data-text="¿Qué to-do's tengo vencidos o sin responsable?">¿Qué to-do's tengo vencidos o sin responsable?</button>
+      <button class="suggestion" type="button" data-act="chat-suggest" data-text="Resúmeme cómo va el proyecto de Grupo Alimentario Norte.">Resúmeme cómo va el proyecto de Grupo Alimentario Norte</button>
+    </div>`;
+  return `${pageHead('Asistente', 'Pídele lo que necesites con tus palabras. Antes de guardar o cambiar nada, te pedirá confirmación.')}
+    ${unavailable ? `<div class="alert warn">${WARN}<div><p>${unavailable}</p></div></div>` : ''}
+    <section class="chat" aria-label="Conversación con el asistente">
+      <div class="chat-log" aria-live="polite">${items || suggestions}</div>
+      ${errorBox()}
+      <div class="composer">
+        ${S.pendingDocs.length ? `<div class="chips">${S.pendingDocs.map((d, i) => `<span class="chip chip-plain">Adjunto: ${esc(d.name)} · ${d.words.toLocaleString('es-ES')} palabras <button class="btn-link" type="button" data-act="chat-remove-doc" data-i="${i}" aria-label="Quitar ${esc(d.name)}">Quitar</button></span>`).join('')}</div>` : ''}
+        <label class="visually-hidden" for="chat-input">Mensaje para el asistente</label>
+        <textarea id="chat-input" rows="3" placeholder="Escribe tu mensaje. Puedes pegar aquí un transcript completo." ${unavailable ? 'disabled' : ''}>${esc(S.chatInput)}</textarea>
+        <div class="row">
+          <div class="row">
+            <span class="btn btn-small file-btn">Adjuntar archivo<input type="file" id="chat-file" data-act="chat-file" accept=".txt,.vtt,.docx" aria-label="Adjuntar archivo .txt, .vtt o .docx" ${unavailable ? 'disabled' : ''}></span>
+            <button class="btn btn-small" type="button" data-act="chat-sample" ${unavailable ? 'disabled' : ''}>Adjuntar transcript de ejemplo</button>
+          </div>
+          ${S.agentRun
+            ? '<button class="btn btn-danger" type="button" data-act="chat-stop">Detener</button>'
+            : `<button class="btn btn-primary" type="button" data-act="chat-send" ${unavailable ? 'disabled' : ''}>Enviar</button>`}
+        </div>
+        <p class="hint">Intro para enviar · Mayús+Intro para nueva línea</p>
+      </div>
+    </section>`;
 }
 
 // ---------------------------------------------------------------------------
@@ -1165,6 +1654,7 @@ function setPath(obj, path, value) {
 
 app.addEventListener('input', (ev) => {
   const el = ev.target;
+  if (el.id === 'chat-input') { S.chatInput = el.value; return; }
   const value = el.type === 'checkbox' ? el.checked : el.value;
   if (el.dataset.bind && S.form) {
     setPath(S.form, el.dataset.bind, value);
@@ -1214,6 +1704,18 @@ app.addEventListener('change', async (ev) => {
     const ids = S.form.participantIds;
     if (el.checked) ids.push(el.value); else ids.splice(ids.indexOf(el.value), 1);
   }
+  if (act === 'chat-file' && el.files[0]) {
+    try {
+      const text = await readFile(el.files[0]);
+      S.pendingDocs.push(addDoc(el.files[0].name, text));
+      S.error = null;
+    } catch (e) {
+      S.error = { message: e.message || 'No se ha podido leer el archivo.' };
+    }
+    render();
+    app.querySelector('#chat-input')?.focus();
+    return;
+  }
   if (act === 'file' && el.files[0]) {
     try {
       S.form.text = await readFile(el.files[0]);
@@ -1223,6 +1725,13 @@ app.addEventListener('change', async (ev) => {
       S.form.errors.text = e.message || 'No se ha podido leer el archivo.';
     }
     render();
+  }
+});
+
+app.addEventListener('keydown', (ev) => {
+  if (ev.target.id === 'chat-input' && ev.key === 'Enter' && !ev.shiftKey && !ev.isComposing) {
+    ev.preventDefault();
+    sendToAgent(ev.target.value);
   }
 });
 
@@ -1302,6 +1811,36 @@ document.addEventListener('click', async (ev) => {
       break;
     }
     case 'download-csv': downloadCsv(); break;
+    case 'chat-send': sendToAgent(app.querySelector('#chat-input')?.value); break;
+    case 'chat-stop': S.agentRun?.abort(); break;
+    case 'chat-sample':
+      S.pendingDocs.push(addDoc(SAMPLE.fileName, SAMPLE.text));
+      render();
+      app.querySelector('#chat-input')?.focus();
+      break;
+    case 'chat-suggest':
+      if (el.dataset.sample) S.pendingDocs.push(addDoc(SAMPLE.fileName, SAMPLE.text));
+      sendToAgent(el.dataset.text);
+      break;
+    case 'chat-remove-doc': S.pendingDocs.splice(Number(el.dataset.i), 1); render(); break;
+    case 'card-confirm': case 'card-discard': case 'card-review': case 'card-retry': case 'card-copy': case 'card-edit-email': {
+      const card = S.chat.find((x) => x.id === el.dataset.card);
+      if (!card) break;
+      if (act === 'card-confirm') { el.disabled = true; await confirmCard(card); }
+      if (act === 'card-discard') { card.state = 'discarded'; S.agentNotes.push('El usuario descartó una de tus propuestas.'); refreshCard(card); }
+      if (act === 'card-review') { S.form = card.form; S.draft = card.draft; S.view = { name: 'review' }; S.error = null; render(); window.scrollTo(0, 0); }
+      if (act === 'card-retry') (card.kind === 'email' ? runEmailCard : runMinutesCard)(card);
+      if (act === 'card-copy') {
+        const text = `Asunto: ${card.subject}\n\n${card.body}`;
+        try { await navigator.clipboard.writeText(text); toast('Email copiado'); } catch { toast('No se ha podido copiar. Ábrelo en el editor para copiarlo.'); }
+      }
+      if (act === 'card-edit-email') {
+        go('email', { id: card.meetingId });
+        S.form = { sender: card.opts.sender, lang: card.opts.lang, subject: card.subject, body: card.body };
+        render();
+      }
+      break;
+    }
   }
 });
 
@@ -1329,6 +1868,7 @@ function subscribe(name) {
   const [db, sample, downloads] = await Promise.all([use('db'), use('sample'), use('downloads')]);
   S.sample = sample;
   S.downloads = downloads;
+  S.toolsOk = Boolean(sample && (await sample.limits().catch(() => null))?.tools);
   if (!db) { S.noDb = true; render(); return; }
   S.db = db;
   ['projects', 'meetings', 'todos'].forEach(subscribe);
