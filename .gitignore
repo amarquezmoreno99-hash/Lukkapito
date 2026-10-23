@@ -1,0 +1,15 @@
+# Local Claude Code settings
+.claude/settings.local.json
+
+# Secrets and local env
+.env
+.env.*
+supabase/.temp/
+supabase/.branches/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+node_modules/
