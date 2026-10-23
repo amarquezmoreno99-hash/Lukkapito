@@ -1,0 +1,38 @@
+/* Lukkap — generado desde tokens.json */
+:root {
+  --navy: #1a2f51;
+  --navy-deep: #1b2242;
+  --blue: #359cdd;
+  --orange: #ed572f;
+  --grey: #a8a8a8;
+  --logo-navy: #1c2242;
+  --logo-blue: #27a3dd;
+  --logo-orange: #ea5c26;
+  --white: #ffffff;
+  --grey-text: #6d7381;
+  --grey-light: #f4f4f4;
+  --grey-line: #e6e7e9;
+  --blue-light: #c2d2eb;
+  --ink: var(--navy-deep);
+  --on-dark: var(--white);
+  --font-sans: "Century Gothic", CenturyGothic, AppleGothic, Questrial, sans-serif;
+  --lienzo-ancho: 960px;
+  --lienzo-alto: 540px;
+  --margen-x: 15px;
+  --margen-y: 9px;
+  --radius-none: 0;
+  --radius-sm: 8px;
+  --radius-pill: 9999px;
+  --radius-circle: 50%;
+}
+.numero-seccion { font-family: var(--font-sans); font-size: 287px; line-height: 1; font-weight: 700; }
+.titulo-seccion { font-family: var(--font-sans); font-size: 72px; line-height: 1.05; font-weight: 700; }
+.cifra { font-family: var(--font-sans); font-size: 48px; line-height: 1.05; font-weight: 700; }
+.titulo-diapositiva { font-family: var(--font-sans); font-size: 32px; line-height: 1.1; font-weight: 700; }
+.titulo-portada { font-family: var(--font-sans); font-size: 24px; line-height: 1.15; font-weight: 700; }
+.destacado { font-family: var(--font-sans); font-size: 20px; line-height: 1.2; font-weight: 700; }
+.subtitulo { font-family: var(--font-sans); font-size: 18px; line-height: 1.2; font-weight: 700; }
+.cuerpo { font-family: var(--font-sans); font-size: 16px; line-height: 1.25; font-weight: 400; }
+.cuerpo-sm { font-family: var(--font-sans); font-size: 14px; line-height: 1.25; font-weight: 400; }
+.nota { font-family: var(--font-sans); font-size: 12px; line-height: 1.25; font-weight: 400; }
+.pie { font-family: var(--font-sans); font-size: 11px; line-height: 1.2; font-weight: 400; }

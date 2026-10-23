@@ -28,7 +28,8 @@ The firm has low digital maturity. Favour simplicity and robustness over feature
    - Colours, typography (font families, sizes, weights), spacing, border radius, shadows, button and input styles.
    - Put all of it in `css/tokens.css` as CSS custom properties. Every other stylesheet must use only these tokens, with no hard-coded colours or font sizes.
    - Load the fonts from the files in `/design/fonts` using `@font-face`. If a font is missing, ask me before substituting it.
-   - **Status:** `/design` has not been delivered yet. `css/tokens.css` currently holds provisional neutral tokens and a system font stack; replace them when the template arrives. Screens may be built on the provisional tokens meanwhile.
+   - **Status:** `/design` holds the Lukkap brand guide (`README.md`, `tokens.json`, `tokens.css`). `css/tokens.css` copies its brand values and maps them to app tokens. Century Gothic is commercial and is used only if installed; the guide's official web substitute, Questrial (OFL), is self-hosted in `/design/fonts`. Logo files (`lukkap-logo-claim-blanco.svg`, `lukkap-logo-color.svg`) are still pending; until then the header shows the app name as text. Never redraw the logo.
+   - Brand rules that override details below: no emojis (use an inline SVG warning icon instead of "⚠"); orange and blue are never used for small text (contrast); no shadows or gradients.
 2. Summarise the extracted design system and the planned file structure, and **wait for my approval** before building screens.
 3. If anything in this document is ambiguous or conflicts with the template, ask me. Do not guess.
 

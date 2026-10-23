@@ -44,7 +44,7 @@ function renderProjects(projects) {
       </div>
       <div class="badges">
         <span class="badge">${p.pendingCount} pendientes</span>
-        ${p.overdueCount ? `<span class="badge badge--danger">${p.overdueCount} vencidos</span>` : ''}
+        ${p.overdueCount ? `<span class="badge badge--alert">${p.overdueCount} vencidos</span>` : ''}
       </div>
     </li>`).join('');
   return `<ul class="project-list">${items}</ul>`;
