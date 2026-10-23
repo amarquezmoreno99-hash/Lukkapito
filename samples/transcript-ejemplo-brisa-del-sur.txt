@@ -1,0 +1,101 @@
+Reunión de seguimiento – Hoteles Brisa del Sur (datos ficticios para pruebas)
+Fecha: 20/10/2026
+Asistentes: Marta Ruiz (Directora de Experiencia Cliente, Brisa del Sur), Jorge Ibáñez (Jefe de Recepción, Brisa del Sur), Laura Gómez (Consultora senior, Lukkap), Pablo Serrano (Analista, Lukkap)
+
+Laura Gómez: Buenos días a los dos y gracias por sacar el hueco. La idea de hoy es repasar los resultados del diagnóstico del viaje del huésped que cerramos la semana pasada y acordar los siguientes pasos. Pablo ha preparado los datos, así que en un momento le paso la palabra.
+
+Marta Ruiz: Perfecto. Te adelanto que en dirección están preocupados por la bajada del NPS de este verano. Pasamos de 52 a 41 en tres meses y nadie tiene muy claro por qué.
+
+Laura Gómez: Justo eso es lo que queremos explicar hoy. Pablo, cuando quieras.
+
+Pablo Serrano: Gracias, Laura. Hemos analizado algo más de 2.300 encuestas de salida y unas 600 reseñas públicas de los cinco hoteles. El momento que más pesa en la caída del NPS es la llegada. En concreto, el 38 % de los comentarios negativos mencionan la espera en el check-in, y en agosto la espera media en hora punta superó los 25 minutos en el hotel de Málaga.
+
+Jorge Ibáñez: Eso cuadra con lo que vemos en recepción. Entre las tres y las cinco de la tarde se nos junta todo: llegan los vuelos de Madrid y de Londres a la vez y tenemos tres puestos abiertos como mucho. La gente llega cansada, con niños, y la cola se ve desde la puerta.
+
+Pablo Serrano: Además hay un dato que nos llamó la atención. La app del hotel permite hacer el check-in online, pero solo la usa el 9 % de los huéspedes. Y de esos, más de la mitad acaba pasando igualmente por el mostrador porque la llave digital no funciona en todas las habitaciones.
+
+Marta Ruiz: Sí, eso lo sabemos. La llave digital solo está instalada en el edificio nuevo de Málaga. En el resto de hoteles la app te deja hacer el check-in, pero luego tienes que recoger la tarjeta igualmente. Es un poco absurdo, la verdad.
+
+Laura Gómez: Es una de las conclusiones más claras del diagnóstico: la promesa digital no se cumple en el momento clave. El huésped hace el trabajo en la app y luego le tratamos como si no lo hubiera hecho. Eso genera más frustración que no tener app.
+
+Jorge Ibáñez: Y luego está el tema del equipo. Este verano hemos tenido mucha rotación en recepción. En Málaga cambiamos a casi la mitad de la plantilla entre junio y septiembre. La gente nueva tarda en coger soltura con el sistema de reservas, que no es precisamente sencillo.
+
+Pablo Serrano: Eso también aparece en los datos. Los comentarios que hablan de "personal poco informado" se duplican en julio y agosto respecto al año pasado. No es tanto un problema de amabilidad, porque la amabilidad del personal sigue siendo lo mejor valorado, sino de que no saben resolver cosas como un cambio de habitación o una factura a nombre de empresa.
+
+Marta Ruiz: Esto es importante para mí. Yo no quiero que el mensaje a dirección sea que el equipo lo hace mal. El equipo está sosteniendo el hotel con muy pocos medios.
+
+Laura Gómez: Totalmente de acuerdo, Marta, y así lo vamos a plantear en el informe. El problema está en el diseño del proceso y en las herramientas, no en las personas. De hecho, la frase que más se repite en las reseñas positivas es que el personal es encantador.
+
+Marta Ruiz: Vale. Entonces, ¿qué proponéis?
+
+Laura Gómez: Proponemos tres líneas. La primera, un piloto de check-in exprés en el hotel de Málaga, que es donde ya tenemos la llave digital. La idea es que quien haya hecho el check-in online vaya directamente a la habitación sin pasar por el mostrador. La segunda, reforzar la formación del personal nuevo con una guía rápida de los diez casos más frecuentes. Y la tercera, medir la llegada de forma continua con una encuesta corta en el momento, no solo al salir.
+
+Jorge Ibáñez: El piloto me parece bien, pero hay que tener en cuenta que en diciembre empiezan las obras del vestíbulo en Málaga. Si el piloto coincide con las obras, vamos a tener ruido en los datos y los huéspedes van a estar más molestos de lo normal.
+
+Pablo Serrano: Buen punto. ¿Sabes las fechas exactas de las obras?
+
+Jorge Ibáñez: Me dijeron que del 1 al 20 de diciembre, pero lo confirmo con mantenimiento.
+
+Laura Gómez: Entonces lo lógico sería arrancar el piloto a mediados de noviembre y tener cuatro semanas de datos limpios antes de las obras. ¿Os encaja?
+
+Marta Ruiz: Me encaja. Lo que necesito es llevar algo concreto al comité de dirección del 12 de noviembre. Si para entonces tenemos el diseño del piloto y una estimación de impacto, mejor.
+
+Laura Gómez: Hecho. Nosotros os enviamos la propuesta detallada del piloto antes del 7 de noviembre, para que tengas tiempo de revisarla antes del comité.
+
+Marta Ruiz: Perfecto.
+
+Pablo Serrano: Para la estimación de impacto necesitaría los datos de colas por franja horaria del sistema de recepción. Con los de septiembre y octubre sería suficiente.
+
+Jorge Ibáñez: Eso te lo saco yo. Te lo envío el viernes 31 como muy tarde.
+
+Pablo Serrano: Genial, gracias.
+
+Marta Ruiz: Otra cosa que me preocupa es el departamento de sistemas. Tienen la agenda muy cargada con la migración del sistema de reservas y no sé si van a poder dedicarle horas al piloto. Si hay que tocar la app, va a ser complicado.
+
+Laura Gómez: Lo hemos pensado. El piloto está diseñado para no tocar la app: usa el check-in online que ya existe y la llave digital que ya está instalada. Lo único que necesitamos de sistemas es que activen un aviso en la app para avisar al huésped de que puede ir directamente a la habitación.
+
+Marta Ruiz: Eso parece asumible. Aun así, lo dejo como riesgo, porque si la migración se retrasa no van a querer tocar nada.
+
+Laura Gómez: De acuerdo, lo recogemos como riesgo abierto.
+
+Jorge Ibáñez: Sobre la guía para el personal nuevo, yo puedo ayudar mucho. Llevo años apuntando las dudas que me hacen los nuevos. Si queréis, os paso la lista y la usáis como base.
+
+Pablo Serrano: Eso sería oro, Jorge. Así no partimos de cero.
+
+Jorge Ibáñez: Os la mando junto con los datos de colas.
+
+Laura Gómez: Perfecto. Y nosotros preparamos el borrador de la guía para revisarlo juntos. Pablo, ¿te encargas tú?
+
+Pablo Serrano: Sí, yo me encargo. Tendré un primer borrador para el 14 de noviembre.
+
+Marta Ruiz: Una pregunta: la encuesta corta de llegada, ¿cómo la haríamos? No quiero saturar al huésped, que ya le mandamos la encuesta de salida.
+
+Pablo Serrano: La idea es una sola pregunta en la app o por SMS una hora después del check-in: "¿Qué tal ha sido tu llegada?", con una escala del uno al cinco y un campo de comentario opcional. Con eso tenemos una señal diaria sin cansar a nadie.
+
+Marta Ruiz: Me gusta que sea solo una pregunta. Pero el envío por SMS tiene coste y tendría que aprobarlo marketing.
+
+Laura Gómez: Entonces dejamos abierto el canal de la encuesta hasta que marketing lo valore. Mientras tanto, en el piloto la lanzamos solo por la app.
+
+Marta Ruiz: Vale, así sí.
+
+Jorge Ibáñez: Una última cosa. Alguien tendría que revisar las reseñas de Google del hotel de Sevilla, porque este mes han salido varias quejas sobre el aparcamiento y no sabemos si es algo puntual o va a más.
+
+Marta Ruiz: Sí, es verdad. No sé quién lo puede mirar, lo vemos.
+
+Laura Gómez: Lo apuntamos como tarea pendiente de asignar.
+
+Marta Ruiz: Bien. Por mi parte, decidido: vamos con el piloto de check-in exprés en Málaga, empezando a mediados de noviembre, y la guía de formación en paralelo. La encuesta de llegada, de momento solo en la app.
+
+Laura Gómez: Perfecto, Marta. Resumo lo que nos llevamos: Jorge envía los datos de colas y la lista de dudas frecuentes el viernes 31; Lukkap envía la propuesta del piloto antes del 7 de noviembre; Pablo prepara el borrador de la guía para el 14 de noviembre; y queda pendiente asignar quién revisa las reseñas de Sevilla. Como riesgos, las obras del vestíbulo en diciembre y la disponibilidad de sistemas.
+
+Jorge Ibáñez: Y confirmo las fechas de las obras con mantenimiento.
+
+Laura Gómez: Eso es, gracias. ¿Algo más?
+
+Marta Ruiz: Nada más. Muy útil, de verdad. Por primera vez tengo una explicación clara de lo que ha pasado con el NPS.
+
+Laura Gómez: Nos alegra mucho. Os mandamos el resumen por email esta tarde. Gracias a los dos.
+
+Jorge Ibáñez: Gracias, hasta pronto.
+
+Pablo Serrano: Hasta pronto.
