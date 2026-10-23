@@ -83,6 +83,11 @@ Todo        { id, projectId, meetingId, task, owner, dueDate | null,
 - The frontend contains only the Supabase URL and the **anon key** (which is public by design). The `service_role` key and the Anthropic key must never appear in the frontend or the repository.
 - Concurrency: last write wins. Show who modified a record last and when.
 - Admins get an **Exportar copia** button (a full JSON backup download) as an extra safety net.
+- **Implementation notes (phase 2):**
+  - Sign-up is blocked for non-allowlisted emails by the Postgres "Before User Created" hook `public.hook_before_user_created` (enabled in Dashboard > Authentication > Hooks). A user removed from the allowlist can still receive a link, but RLS returns no data and the app signs them out.
+  - Magic links use supabase-js's **implicit** flow (works across browsers). Tokens/errors arrive in the URL hash, so `app.js` waits for `getSession()` before routing and reads `#error_code=...` itself.
+  - `created_by` / `updated_by` / `updated_at` are set by a database trigger; never send them from the client. Map user IDs to names with the `member_directory()` RPC.
+  - `supabase/tests/test_rls.py` checks the access rules against a local Postgres; extend it when adding tables or policies.
 
 ## 6. AI integration (Anthropic API via Supabase Edge Function)
 

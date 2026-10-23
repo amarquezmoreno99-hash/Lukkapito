@@ -7,7 +7,13 @@
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/app.css">
-  <script type="module" src="js/app.js"></script>
+  <script type="module">
+    import('./js/app.js').catch((err) => {
+      console.error(err);
+      document.getElementById('main').innerHTML =
+        '<section class="panel"><p class="empty-state">No se ha podido cargar la aplicación. Revisa tu conexión y recarga la página.</p></section>';
+    });
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Saltar al contenido</a>
@@ -22,7 +28,7 @@
     </div>
   </header>
 
-  <main class="app-main" id="main" tabindex="-1"></main>
+  <main class="app-main" id="main" tabindex="-1"><p class="empty-state">Cargando…</p></main>
 
   <footer class="app-footer" lang="en">Transforming the future. <strong>Today.</strong></footer>
 </body>

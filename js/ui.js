@@ -19,3 +19,11 @@ export function todayIso() {
   const pad = (n) => String(n).padStart(2, '0');
   return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
 }
+
+// Inline warning icon (the brand forbids emojis such as "⚠").
+export function iconWarning() {
+  return `<svg class="icon icon--warning" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path d="M12 3 2 21h20L12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M12 10v5M12 18v.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </svg>`;
+}
